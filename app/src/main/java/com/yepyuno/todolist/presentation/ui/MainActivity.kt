@@ -1,4 +1,4 @@
-package com.yepyuno.todolist.presentation
+package com.yepyuno.todolist.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
