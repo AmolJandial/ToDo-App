@@ -1,7 +1,9 @@
 package com.yepyuno.todolist.presentation.di
 
-import com.yepyuno.todolist.domain.repository.UserRepository
+import com.yepyuno.todolist.domain.repository.Repository
+import com.yepyuno.todolist.domain.usecase.GetCategoryUsecase
 import com.yepyuno.todolist.domain.usecase.GetUserUsecase
+import com.yepyuno.todolist.domain.usecase.InsertCategoryUsecase
 import com.yepyuno.todolist.domain.usecase.InsertUserUsecase
 import dagger.Module
 import dagger.Provides
@@ -15,13 +17,23 @@ class UsecaseModule {
 
     @Provides
     @Singleton
-    fun provideInsertUserUsecase(userRepository: UserRepository): InsertUserUsecase =
-        InsertUserUsecase(userRepository)
+    fun provideInsertUserUsecase(repository: Repository): InsertUserUsecase =
+        InsertUserUsecase(repository)
 
     @Provides
     @Singleton
-    fun provideGetUserUsecase(userRepository: UserRepository): GetUserUsecase =
-        GetUserUsecase(userRepository)
+    fun provideGetUserUsecase(repository: Repository): GetUserUsecase =
+        GetUserUsecase(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetCategoryUsecase(repository: Repository): GetCategoryUsecase =
+        GetCategoryUsecase(repository)
+
+    @Provides
+    @Singleton
+    fun provideInsertCategoryUsecase(repository: Repository): InsertCategoryUsecase =
+        InsertCategoryUsecase(repository)
 
 
 }

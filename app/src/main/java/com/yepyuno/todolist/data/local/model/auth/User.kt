@@ -1,4 +1,4 @@
-package com.yepyuno.todolist.data.local.model
+package com.yepyuno.todolist.data.local.model.auth
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

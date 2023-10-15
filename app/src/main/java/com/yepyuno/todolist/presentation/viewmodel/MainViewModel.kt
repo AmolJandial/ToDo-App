@@ -1,20 +1,22 @@
 package com.yepyuno.todolist.presentation.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.yepyuno.todolist.data.local.model.User
+import com.yepyuno.todolist.data.local.model.auth.User
 import com.yepyuno.todolist.domain.usecase.GetUserUsecase
+import com.yepyuno.todolist.domain.usecase.InsertCategoryUsecase
 import com.yepyuno.todolist.domain.usecase.InsertUserUsecase
+import com.yepyuno.todolist.util.InitialDataHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val insertUserUsecase: InsertUserUsecase,
-    private val getUserUsecase: GetUserUsecase
+    private val getUserUsecase: GetUserUsecase,
+    private val insertCategoryUsecase: InsertCategoryUsecase
 ): ViewModel() {
 
     companion object{
@@ -26,18 +28,20 @@ class MainViewModel(
     fun getUser() = viewModelScope.launch(Dispatchers.IO) {
         val data = getUserUsecase.execute()
         if(data.firstOrNull() == null){
-            insertUserUsecase.execute(
-                User(
-                    0,
-                    "",
-                    "",
-                    false
-                )
-            )
+            setupData()
             Log.d(TAG, "insertUser: User Inserted")
         }
         isReady = true
         Log.d(TAG, "getUser: Got User ${data.asLiveData().value?.isSynced}")
+    }
+
+    private suspend fun setupData(){
+        val categories = InitialDataHelper.initialCategoryList()
+        insertUserUsecase.execute(InitialDataHelper.initialUser())
+        insertCategoryUsecase.execute(categories[0])
+        insertCategoryUsecase.execute(categories[1])
+        insertCategoryUsecase.execute(categories[2])
+
     }
 
 

@@ -9,7 +9,11 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.yepyuno.todolist.R
+import com.yepyuno.todolist.data.local.model.auth.User
+import com.yepyuno.todolist.data.local.model.notes.Category
+import com.yepyuno.todolist.presentation.ui.home.adapter.CategoryAdapter
 import com.yepyuno.todolist.presentation.viewmodel.MainViewModel
+import com.yepyuno.todolist.presentation.viewmodel.factory.HomeViewModelFactory
 import com.yepyuno.todolist.presentation.viewmodel.factory.MainViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +29,11 @@ class MainActivity : AppCompatActivity() {
     
     @Inject
     lateinit var mainViewModelFactory: MainViewModelFactory
+    @Inject
+    lateinit var categoryAdapter: CategoryAdapter
+    @Inject
+    lateinit var homeViewModelFactory: HomeViewModelFactory
+
 
     private val mainViewModel by lazy{
         ViewModelProvider(this, mainViewModelFactory)[MainViewModel::class.java]

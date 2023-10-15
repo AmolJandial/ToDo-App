@@ -1,10 +1,10 @@
 package com.yepyuno.todolist.domain.usecase
 
-import com.yepyuno.todolist.data.local.model.User
-import com.yepyuno.todolist.domain.repository.UserRepository
+import com.yepyuno.todolist.data.local.model.auth.User
+import com.yepyuno.todolist.domain.repository.Repository
 
 class InsertUserUsecase(
-    private val userRepository: UserRepository
+    private val repository: Repository
 ) {
-    suspend fun execute(user: User) = userRepository.insertUser(user)
+    suspend fun execute(user: User) = repository.insertUser(user)
 }

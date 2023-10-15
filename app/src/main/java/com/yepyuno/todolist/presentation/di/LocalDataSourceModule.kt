@@ -1,8 +1,9 @@
 package com.yepyuno.todolist.presentation.di
 
-import com.yepyuno.todolist.data.local.db.UserDAO
-import com.yepyuno.todolist.data.repository.dataSource.UserLocalDataSource
-import com.yepyuno.todolist.data.repository.dataSourceImpl.UserLocalDataSourceImpl
+import com.yepyuno.todolist.data.local.db.dao.CategoryDAO
+import com.yepyuno.todolist.data.local.db.dao.UserDAO
+import com.yepyuno.todolist.data.repository.dataSource.LocalDataSource
+import com.yepyuno.todolist.data.repository.dataSourceImpl.LocalDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,8 @@ class LocalDataSourceModule {
 
     @Provides
     @Singleton
-    fun provideUserLocalDataSource(userDAO: UserDAO): UserLocalDataSource =
-        UserLocalDataSourceImpl(userDAO)
+    fun provideUserLocalDataSource(userDAO: UserDAO,
+                                   categoryDAO: CategoryDAO): LocalDataSource =
+        LocalDataSourceImpl(userDAO, categoryDAO)
 
 }

@@ -3,4 +3,9 @@
     <dimen name="top_app_bar_image_size">60dp</dimen>
     <dimen name="top_app_bar_vertical_margin">8dp</dimen>
     <dimen name="top_app_bar_start_margin">16dp</dimen>
+
+
+    <dimen name="list_item_vertical_margin">16dp</dimen>
+    <dimen name="list_item_start_margin">16dp</dimen>
+    <dimen name="content_home_padding">16dp</dimen>
 </resources>

@@ -11,6 +11,11 @@
     <style name="TextAppearance.App.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textColor">@color/theme1_color_on_surface</item>
     </style>
+
+    <style name="TextAppearance.App.TitleLarge.Bold" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/theme1_color_on_surface</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     
     <style name="Theme.App.Staring" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/material_dynamic_primary100</item>

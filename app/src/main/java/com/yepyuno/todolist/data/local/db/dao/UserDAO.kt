@@ -1,10 +1,10 @@
-package com.yepyuno.todolist.data.local.db
+package com.yepyuno.todolist.data.local.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.yepyuno.todolist.data.local.model.User
+import com.yepyuno.todolist.data.local.model.auth.User
 import kotlinx.coroutines.flow.Flow
 
 
