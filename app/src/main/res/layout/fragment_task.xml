@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.yepyuno.todolist.presentation.viewmodel.TaskViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionGroup="true"
+        android:background="@color/theme1_color_surface"
+        tools:context=".presentation.ui.task.FragmentTask">
+
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            >
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
+                style="?attr/collapsingToolbarLayoutMediumStyle"
+                >
+
+                <com.google.android.material.appbar.MaterialToolbar
+
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:navigationIcon="@drawable/back_icon"
+                    app:title="@{viewmodel.category.title}"
+                    android:elevation="0dp"
+                    tools:title="test"
+                    app:titleTextAppearance="@style/TextAppearance.App.TitleLarge"
+                    />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

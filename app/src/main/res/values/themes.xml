@@ -6,10 +6,52 @@
         <item name="colorSurface">@color/theme1_color_surface</item>
         <item name="colorOnSurface">@color/theme1_color_on_surface</item>
         <item name="colorSurfaceContainerHigh">@color/theme1_color_surface</item>
+        <item name="bottomAppBarStyle">@style/Widget.App.BottomAppBar</item>
+        <item name="materialSearchBarStyle">@style/Widget.App.SearchBar</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialDialogTheme</item>
+        <item name="appBarLayoutStyle">@style/Widget.App.AppBar</item>
+    </style>
+
+    <style name="Widget.App.AppBar" parent="Widget.Material3.AppBarLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.AppBar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.AppBar" parent="">
+        <item name="colorPrimary">@color/theme1_color_surface</item>
+    </style>
+    
+    <style name="ThemeOverlay.App.MaterialDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@color/theme1_color_surface</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/theme1_color_on_surface</item>
+    </style>
+
+    <style name="Widget.App.BottomAppBar" parent="Widget.Material3.BottomAppBar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomAppBar</item>
+    </style>
+
+    <style name="Widget.App.SearchBar" parent="Widget.Material3.SearchBar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.SearchBar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomAppBar" parent="">
+        <item name="colorPrimary">@color/theme1_color_surface</item>
+    </style>
+
+    <style name="ThemeOverlay.App.SearchBar" parent="">
+        <item name="colorPrimary">@color/theme1_color_surface</item>
     </style>
 
     <style name="TextAppearance.App.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textColor">@color/theme1_color_on_surface</item>
+    </style>
+
+    <style name="TextAppearance.App.TitleLarge.LessEmphasis" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/theme1_color_on_surface_container</item>
     </style>
 
     <style name="TextAppearance.App.TitleLarge.Bold" parent="TextAppearance.Material3.TitleLarge">

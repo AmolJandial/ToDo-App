@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.transition.MaterialSharedAxis
 import com.yepyuno.todolist.R
 import com.yepyuno.todolist.databinding.FragmentHomeBinding
 import com.yepyuno.todolist.presentation.ui.MainActivity
@@ -37,8 +41,24 @@ class FragmentHome : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
         prepareRecyclerView()
         viewCategoryItems()
+        setListeners()
+
+    }
+
+    private fun setListeners(){
+        binding.bottomBar.setOnClickListener {
+            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply{
+                duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            }
+            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply{
+                duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            }
+            findNavController().navigate(FragmentHomeDirections.actionFragmentHomeToFragmentCategory())
+        }
     }
 
 

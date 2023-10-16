@@ -9,7 +9,7 @@
 
     <color name="theme1_color_surface">#FAF3F0</color>
     <color name="theme1_color_on_surface">#191818</color>
-    
+    <color name="theme1_color_on_surface_container">#757474</color>
     <color name="task_color1">#FF8080</color>
     <color name="task_color2">#FFCF96</color>
     <color name="task_color3">#8DDFCB</color>

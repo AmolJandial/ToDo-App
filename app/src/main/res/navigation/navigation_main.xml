@@ -9,5 +9,14 @@
         android:id="@+id/fragmentHome"
         android:name="com.yepyuno.todolist.presentation.ui.home.FragmentHome"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentCategory"
+            app:destination="@id/fragmentCategory" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCategory"
+        android:name="com.yepyuno.todolist.presentation.ui.task.FragmentTask"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_task" />
 </navigation>
