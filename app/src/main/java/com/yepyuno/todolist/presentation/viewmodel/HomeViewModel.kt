@@ -9,12 +9,14 @@ import androidx.lifecycle.viewModelScope
 import com.yepyuno.todolist.data.local.model.notes.Category
 import com.yepyuno.todolist.domain.usecase.GetCategoryUsecase
 import com.yepyuno.todolist.domain.usecase.InsertCategoryUsecase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(
-    private val insertCategoryUsecase: InsertCategoryUsecase,
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     private val getCategoryUsecase: GetCategoryUsecase
 ): ViewModel() {
 

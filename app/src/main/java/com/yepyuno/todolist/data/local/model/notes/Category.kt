@@ -1,5 +1,7 @@
 package com.yepyuno.todolist.data.local.model.notes
 
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Fts4
@@ -11,8 +13,9 @@ data class Category(
     val id: Int,
 
     var title: String?,
-    var theme: String?,
-    var icon: String,
+    var theme: Int?,
+    var icon: Int,
+    val isDefault: Boolean,
     var tasks: List<Task>?
 
 )

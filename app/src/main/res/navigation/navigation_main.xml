@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentCategory"
-        android:name="com.yepyuno.todolist.presentation.ui.task.FragmentTask"
+        android:name="com.yepyuno.todolist.presentation.ui.category.FragmentCategory"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_category" />
 </navigation>

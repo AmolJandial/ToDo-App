@@ -9,11 +9,14 @@ import com.yepyuno.todolist.domain.usecase.GetUserUsecase
 import com.yepyuno.todolist.domain.usecase.InsertCategoryUsecase
 import com.yepyuno.todolist.domain.usecase.InsertUserUsecase
 import com.yepyuno.todolist.util.InitialDataHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val insertUserUsecase: InsertUserUsecase,
     private val getUserUsecase: GetUserUsecase,
     private val insertCategoryUsecase: InsertCategoryUsecase
@@ -32,7 +35,7 @@ class MainViewModel(
             Log.d(TAG, "insertUser: User Inserted")
         }
         isReady = true
-        Log.d(TAG, "getUser: Got User ${data.asLiveData().value?.isSynced}")
+
     }
 
     private suspend fun setupData(){

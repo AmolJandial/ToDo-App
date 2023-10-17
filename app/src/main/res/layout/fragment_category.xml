@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:transitionGroup="true"
         android:background="@color/theme1_color_surface"
-        tools:context=".presentation.ui.task.FragmentTask">
+        tools:context=".presentation.ui.category.FragmentCategory">
 
 
 

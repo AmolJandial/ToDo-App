@@ -12,9 +12,8 @@ import com.yepyuno.todolist.R
 import com.yepyuno.todolist.data.local.model.auth.User
 import com.yepyuno.todolist.data.local.model.notes.Category
 import com.yepyuno.todolist.presentation.ui.home.adapter.CategoryAdapter
+import com.yepyuno.todolist.presentation.viewmodel.HomeViewModel
 import com.yepyuno.todolist.presentation.viewmodel.MainViewModel
-import com.yepyuno.todolist.presentation.viewmodel.factory.HomeViewModelFactory
-import com.yepyuno.todolist.presentation.viewmodel.factory.MainViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,23 +25,22 @@ class MainActivity : AppCompatActivity() {
     companion object{
         const val TAG = "MainActivity"
     }
-    
-    @Inject
-    lateinit var mainViewModelFactory: MainViewModelFactory
+
     @Inject
     lateinit var categoryAdapter: CategoryAdapter
-    @Inject
-    lateinit var homeViewModelFactory: HomeViewModelFactory
-
 
     private val mainViewModel by lazy{
-        ViewModelProvider(this, mainViewModelFactory)[MainViewModel::class.java]
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
+
+    val homeViewModel by lazy{
+        ViewModelProvider(this)[HomeViewModel::class.java]
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+//        this.deleteDatabase("local_db")
         getLocalData()
     }
 

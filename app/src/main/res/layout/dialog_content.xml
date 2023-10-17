@@ -23,7 +23,7 @@
             app:icon="@drawable/add_emoji_icon"
             app:iconGravity="start"
             app:iconSize="@dimen/dialog_icon_size"
-            app:iconTint="@color/theme1_color_on_surface_container"
+            app:iconTint="@color/theme1_color_on_surface"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

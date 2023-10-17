@@ -3,9 +3,34 @@
     <style name="Theme.App.Light" parent="Theme.Material3.DayNight.NoActionBar">
 
         <item name="colorPrimary">@color/theme1_color_primary</item>
+        <item name="colorOnPrimary">@color/theme1_color_on_primary</item>
+        <item name="colorPrimaryContainer">@color/theme1_color_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/theme1_color_on_primary_container</item>
+
+        <item name="colorSecondary">@color/theme1_color_secondary</item>
+        <item name="colorOnSecondary">@color/theme1_color_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/theme1_color_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/theme1_color_on_secondary_container</item>
+
+        <item name="colorTertiary">@color/theme1_color_tertiary</item>
+        <item name="colorOnTertiary">@color/theme1_color_on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/theme1_color_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/theme1_color_on_tertiary_container</item>
+
+        <item name="background">@color/theme1_color_background</item>
+        <item name="colorOnBackground">@color/theme1_color_on_background</item>
+
         <item name="colorSurface">@color/theme1_color_surface</item>
         <item name="colorOnSurface">@color/theme1_color_on_surface</item>
-        <item name="colorSurfaceContainerHigh">@color/theme1_color_surface</item>
+        <item name="colorSurfaceVariant">@color/theme1_color_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/theme1_color_on_surface_variant</item>
+
+        <item name="colorError">@color/theme1_color_error</item>
+        <item name="colorOnError">@color/theme1_color_on_error</item>
+        <item name="colorErrorContainer">@color/theme1_color_error_container</item>
+        <item name="colorOnErrorContainer">@color/theme1_color_on_error_container</item>
+
+
         <item name="bottomAppBarStyle">@style/Widget.App.BottomAppBar</item>
         <item name="materialSearchBarStyle">@style/Widget.App.SearchBar</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialDialogTheme</item>
@@ -51,7 +76,7 @@
     </style>
 
     <style name="TextAppearance.App.TitleLarge.LessEmphasis" parent="TextAppearance.Material3.TitleLarge">
-        <item name="android:textColor">@color/theme1_color_on_surface_container</item>
+        <item name="android:textColor">@color/theme1_color_on_surface_variant</item>
     </style>
 
     <style name="TextAppearance.App.TitleLarge.Bold" parent="TextAppearance.Material3.TitleLarge">

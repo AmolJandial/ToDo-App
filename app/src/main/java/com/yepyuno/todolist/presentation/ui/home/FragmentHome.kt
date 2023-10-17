@@ -28,8 +28,7 @@ class FragmentHome : Fragment() {
     }
 
     private val viewmodel by lazy{
-        val factory = (activity as MainActivity).homeViewModelFactory
-        ViewModelProvider(this, factory)[HomeViewModel::class.java]
+        (activity as MainActivity).homeViewModel
     }
 
     override fun onCreateView(
@@ -50,7 +49,7 @@ class FragmentHome : Fragment() {
     }
 
     private fun setListeners(){
-        binding.bottomBar.setOnClickListener {
+        binding.bottomAppBar.setOnClickListener {
             exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply{
                 duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
             }
@@ -64,7 +63,7 @@ class FragmentHome : Fragment() {
 
 
     private fun prepareRecyclerView() {
-        binding.content.CategoryRecyclerView.apply {
+        binding.CategoryRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = categoryAdapter
         }
@@ -73,7 +72,7 @@ class FragmentHome : Fragment() {
     private fun viewCategoryItems() {
         viewmodel.getCategoryList()
         viewmodel.categoryList.observe(viewLifecycleOwner){
-            categoryAdapter.differ.submitList(it)
+            categoryAdapter.submitList(it)
         }
     }
 
