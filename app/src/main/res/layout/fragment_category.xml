@@ -6,14 +6,13 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.yepyuno.todolist.presentation.viewmodel.TaskViewModel" />
+            type="com.yepyuno.todolist.presentation.viewmodel.CategoryViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:transitionGroup="true"
-        android:background="@color/theme1_color_surface"
         tools:context=".presentation.ui.category.FragmentCategory">
 
 

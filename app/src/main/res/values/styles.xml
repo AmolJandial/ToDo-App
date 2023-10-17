@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+<!--    Text Styles-->
+    <style name="TextAppearance.App.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
+    <style name="TextAppearance.App.TitleLarge.LessEmphasis" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="TextAppearance.App.TitleLarge.Bold" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+<!--Material Widgets Theme Overlay-->
+    <style name="ThemeOverlay.App.AppBar" parent="">
+        <item name="colorSurface">?attr/background</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomAppBar" parent="">
+        <item name="colorPrimary">@color/theme1_color_surface</item>
+    </style>
+
+    <style name="ThemeOverlay.App.MaterialDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurfaceContainerHigh">?attr/colorSurfaceVariant</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
+    </style>
+
+
+</resources>

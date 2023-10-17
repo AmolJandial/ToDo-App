@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.yepyuno.todolist.data.local.model.notes.Category
 
 
-class TaskViewModel: ViewModel() {
+class CategoryViewModel: ViewModel() {
 
     var category: MutableLiveData<Category> = MutableLiveData()
 

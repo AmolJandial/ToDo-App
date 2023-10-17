@@ -23,7 +23,7 @@
             app:icon="@drawable/add_emoji_icon"
             app:iconGravity="start"
             app:iconSize="@dimen/dialog_icon_size"
-            app:iconTint="@color/theme1_color_on_surface"
+            app:iconTint="?attr/colorOnSurfaceVariant"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/dialog_content_vertical_margin"
             android:hint="@string/dialog_input_layout_hint"
-            app:boxBackgroundColor="@color/theme1_color_surface"
+            app:boxBackgroundColor="?attr/colorSurfaceVariant"
             app:layout_constraintBottom_toBottomOf="@+id/addEmoji"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/addEmoji"
