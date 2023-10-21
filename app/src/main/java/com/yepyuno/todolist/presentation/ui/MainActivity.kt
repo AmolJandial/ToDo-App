@@ -1,7 +1,8 @@
-package com.yepyuno.todolist
+package com.yepyuno.todolist.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.yepyuno.todolist.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
