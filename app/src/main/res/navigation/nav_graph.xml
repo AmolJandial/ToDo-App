@@ -7,7 +7,18 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.yepyuno.todolist.presentation.ui.fragments.ListFragment"
+        android:name="com.yepyuno.todolist.presentation.ui.fragments.lists.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_listDetailFragment"
+            app:destination="@id/listDetailFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/listDetailFragment"
+        android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.ListDetailFragment"
+        android:label="fragment_list_detail"
+        tools:layout="@layout/fragment_list_detail" />
 </navigation>

@@ -2,4 +2,9 @@
     <string name="app_name">ToDo List</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="tells_about_user_sync_state">Tells about user sync state</string>
+    <string name="main_content">MAIN CONTENT</string>
+    <string name="not_synced">Not Synced</string>
+    <string name="new_list">New List</string>
 </resources>

@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="splashScreenBackground">#E76F66</color>
+    <color name="listColorTheme1">#9C27B0</color>
+    <color name="listColorTheme2">#E91E63</color>
+    <color name="listColorTheme3">#FF8A80</color>
 </resources>

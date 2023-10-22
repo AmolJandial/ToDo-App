@@ -17,5 +17,14 @@ class Constants {
 
         //Fragment constants
         const val LOGTAG = "logging"
+
+
+        //List Constants
+        const val ICON_MYDAY = "ic_my_day"
+        const val ICON_IMPORTANT = "ic_important"
+        const val ICON_TASKS = "ic_tasks"
+        const val COLOR1 = "listColorTheme1"
+        const val COLOR2 = "listColorTheme2"
+        const val COLOR3 = "listColorTheme3"
     }
 }

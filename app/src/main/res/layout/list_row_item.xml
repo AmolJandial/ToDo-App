@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginHorizontal="@dimen/list_row_horizontal_margin"
+    android:layout_marginVertical="@dimen/list_row_vertical_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="listWithTasks"
+            type="com.yepyuno.todolist.data.local.models.ListWithTasks" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/listIcon"
+            android:layout_width="@dimen/list_row_icon_size"
+            android:layout_height="@dimen/list_row_icon_size"
+            iconName="@{listWithTasks.listEntity.icon}"
+            iconTheme="@{listWithTasks.listEntity.theme}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            tools:src="@drawable/ic_important" />
+
+        <TextView
+            android:id="@+id/listTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/list_row_title_margin_start"
+            android:layout_marginEnd="@dimen/list_row_title_margin_end"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            setTitle="@{listWithTasks.listEntity.title}"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/listTaskCount"
+            app:layout_constraintStart_toEndOf="@+id/listIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="Important" />
+
+        <TextView
+            android:id="@+id/listTaskCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            setListCount="@{listWithTasks.taskEntity}"
+            android:alpha="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

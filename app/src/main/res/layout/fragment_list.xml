@@ -1,18 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.ui.fragments.ListFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:layout_gravity="center"
-         />
+    <data>
+        <variable
+            name="homeUiState"
+            type="com.yepyuno.todolist.presentation.stateHolders.models.HomeUiState" />
+    </data>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.fragments.lists.ListFragment">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:contentDescription="@string/tells_about_user_sync_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/appBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants"
+                android:minHeight="?attr/actionBarSize"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:menu="@menu/home_app_bar_menu" >
+
+
+                <TextView
+                    android:id="@+id/appBarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/not_synced"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/appBarDropDownButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    app:icon="@drawable/ic_drop_down"
+                    />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:transitionGroup="true"
+            android:id="@+id/listRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dp"
+            android:layout_gravity="bottom"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            style="@style/Widget.Material3.BottomAppBar"
+            android:padding="8dp"
+            android:descendantFocusability="blocksDescendants"
+            >
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_add"
+                android:alpha="0.5"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/new_list"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:alpha="0.5"
+                />
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
