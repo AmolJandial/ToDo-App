@@ -19,7 +19,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository,
     private val getListsUsecase: GetListsUsecase,
     private val getListsWithTasksUsecase: GetListsWithTasksUsecase
@@ -29,6 +29,7 @@ class ListViewModel @Inject constructor(
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     var isReady = false
+    var listId: Int = 0
 
 
     fun fetchData() {

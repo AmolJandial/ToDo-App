@@ -1,5 +1,6 @@
 package com.yepyuno.todolist.presentation.ui.fragments.listDetail
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 import com.yepyuno.todolist.R
@@ -19,17 +23,21 @@ import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListDetailViewMo
 import com.yepyuno.todolist.presentation.ui.MainActivity
 import com.yepyuno.todolist.util.Constants.Companion.LOGTAG
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListDetailFragment : Fragment() {
 
-    private val listDetailViewModel by lazy { (activity as MainActivity).listDetailViewModel }
+    private val listDetailViewModel by hiltNavGraphViewModels<ListDetailViewModel>(R.id.listDetailDialogFragment)
+    private val mainViewModel by lazy { (activity as MainActivity).mainViewModel }
 
     private var _binding: FragmentListDetailBinding? = null
     private val binding get() = _binding!!
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +61,12 @@ class ListDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        listDetailViewModel.fetchData(mainViewModel.listId)
+
         observeUiState()
+        setListeners()
+
     }
 
     private fun observeUiState(){
@@ -64,11 +77,37 @@ class ListDetailFragment : Fragment() {
                         Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
                         listDetailViewModel.userMessageShown()
                     }
-                    Log.d(LOGTAG, "observeUiState: ${uiState.list}")
+                    if(uiState.showCreateDialog){
+                        val action = ListDetailFragmentDirections.actionListDetailFragmentToCreateListDialog()
+                        findNavController().navigate(action)
+                        listDetailViewModel.createDialogShown()
+                    }
+                    binding.uiState = uiState
                 }
             }
         }
     }
+
+    private fun setListeners(){
+        binding.collapsingToolbar.setOnClickListener {
+            val action = ListDetailFragmentDirections.actionListDetailFragmentToUpdateListDialog()
+            findNavController().navigate(action)
+        }
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+    }
+
+    private fun createUpdateDialogListener() = DialogInterface.OnClickListener { _, which ->
+
+    }
+
+    private fun createNewDialogListener() = DialogInterface.OnClickListener { _, which ->
+
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

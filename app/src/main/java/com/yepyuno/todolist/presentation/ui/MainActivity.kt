@@ -7,25 +7,16 @@ import android.view.View
 import android.view.ViewTreeObserver
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.yepyuno.todolist.R
 import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListDetailViewModel
-import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListViewModel
+import com.yepyuno.todolist.presentation.stateHolders.viewmodel.MainViewModel
 import com.yepyuno.todolist.util.Constants.Companion.LOGTAG
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-
-    val listViewModel by viewModels<ListViewModel>()
-    val listDetailViewModel by viewModels<ListDetailViewModel>()
+    val mainViewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -35,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         val view = findViewById<View>(android.R.id.content)
         view.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
-                return if(listViewModel.isReady){
+                return if(mainViewModel.isReady){
                     Log.d(LOGTAG, "onCreate: GOT DATA FROM DATASTORE")
                     view.viewTreeObserver.removeOnPreDrawListener(this)
                     true

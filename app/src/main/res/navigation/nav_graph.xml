@@ -12,13 +12,32 @@
         tools:layout="@layout/fragment_list" >
         <action
             android:id="@+id/action_listFragment_to_listDetailFragment"
-            app:destination="@id/listDetailFragment" />
+            app:destination="@id/listDetailDialogFragment" />
 
 
     </fragment>
-    <fragment
-        android:id="@+id/listDetailFragment"
-        android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.ListDetailFragment"
-        android:label="fragment_list_detail"
-        tools:layout="@layout/fragment_list_detail" />
+    <navigation android:id="@+id/listDetailDialogFragment"
+        app:startDestination="@id/listDetailFragment">
+        <fragment
+            android:id="@+id/listDetailFragment"
+            android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.ListDetailFragment"
+            android:label="fragment_list_detail"
+            tools:layout="@layout/fragment_list_detail">
+
+            <action
+                android:id="@+id/action_listDetailFragment_to_createListDialog"
+                app:destination="@id/createListDialog" />
+            <action
+                android:id="@+id/action_listDetailFragment_to_updateListDialog"
+                app:destination="@id/updateListDialog" />
+        </fragment>
+        <dialog
+            android:id="@+id/updateListDialog"
+            android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.UpdateListDialog"
+            android:label="UpdateListDialog" />
+        <dialog
+            android:id="@+id/createListDialog"
+            android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.CreateListDialog"
+            android:label="CreateListDialog" />
+    </navigation>
 </navigation>
