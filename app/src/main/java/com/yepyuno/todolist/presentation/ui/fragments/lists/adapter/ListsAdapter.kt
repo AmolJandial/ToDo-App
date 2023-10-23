@@ -13,25 +13,35 @@ import javax.inject.Singleton
 @Singleton
 class ListsAdapter @Inject constructor(): ListAdapter<ListWithTasks, ListsAdapter.ListsViewHolder>(ListsDiffUtil) {
 
-    class ListsViewHolder(private val binding: ListRowItemBinding): RecyclerView.ViewHolder(binding.root){
+    private var onItemClickListener: ((ListWithTasks) -> Unit)? = null
+
+    inner class ListsViewHolder(private val binding: ListRowItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(listWithTasks: ListWithTasks){
             binding.listWithTasks = listWithTasks
             binding.executePendingBindings()
+
+            binding.root.setOnClickListener {
+                onItemClickListener?.let {
+                    it(listWithTasks)
+                }
+            }
         }
 
-        companion object{
-            fun from(parent: ViewGroup): ListsViewHolder =
-                ListsViewHolder(ListRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListsViewHolder {
-        return ListsViewHolder.from(parent)
+        val binding = ListRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ListsViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
+    fun setOnItemClickListener(listener: (ListWithTasks) -> Unit){
+        onItemClickListener = listener
+    }
+
 }
 
 object ListsDiffUtil: DiffUtil.ItemCallback<ListWithTasks>(){

@@ -17,6 +17,8 @@ import com.yepyuno.todolist.R
 import com.yepyuno.todolist.databinding.FragmentListBinding
 import com.yepyuno.todolist.presentation.ui.MainActivity
 import com.yepyuno.todolist.presentation.ui.fragments.lists.adapter.ListsAdapter
+import com.yepyuno.todolist.util.Constants.Companion.FRAGMENT_RECYCLER
+import com.yepyuno.todolist.util.Constants.Companion.FRAGMENT_NEW_LIST
 import com.yepyuno.todolist.util.Constants.Companion.LOGTAG
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -29,13 +31,10 @@ class ListFragment : Fragment() {
     lateinit var listsAdapter: ListsAdapter
 
     private val listViewModel by lazy{ (activity as MainActivity).listViewModel }
+    private val listDetailViewModel by lazy{ (activity as MainActivity).listDetailViewModel }
+
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
 
     override fun onCreateView(
@@ -79,7 +78,7 @@ class ListFragment : Fragment() {
     }
 
     private fun setRecyclerView(){
-        listsAdapter = ListsAdapter()
+
         binding.listRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = listsAdapter
@@ -90,16 +89,27 @@ class ListFragment : Fragment() {
         binding.appBar.setOnClickListener {
 
         }
+
         binding.bottomAppBar.setOnClickListener {
-            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).apply {
                 duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
             }
-            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false).apply {
                 duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
             }
-            val action = ListFragmentDirections.actionListFragmentToListDetailFragment()
-            findNavController().navigate(action)
+            listDetailViewModel.fetchData(-1)
+            navigateToListDetail()
         }
+
+        listsAdapter.setOnItemClickListener {
+            listDetailViewModel.fetchData(it.listEntity.id)
+            navigateToListDetail()
+        }
+    }
+
+    private fun navigateToListDetail(){
+        val action = ListFragmentDirections.actionListFragmentToListDetailFragment()
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

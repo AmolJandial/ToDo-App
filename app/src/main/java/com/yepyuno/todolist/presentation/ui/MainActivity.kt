@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.yepyuno.todolist.R
+import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListDetailViewModel
 import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListViewModel
 import com.yepyuno.todolist.util.Constants.Companion.LOGTAG
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,10 +23,12 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+
     val listViewModel by viewModels<ListViewModel>()
+    val listDetailViewModel by viewModels<ListDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

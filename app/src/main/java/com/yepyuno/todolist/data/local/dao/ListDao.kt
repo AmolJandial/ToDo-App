@@ -6,6 +6,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.yepyuno.todolist.data.local.models.ListEntity
 import com.yepyuno.todolist.data.local.models.ListWithTasks
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ListDao {
@@ -23,4 +24,6 @@ interface ListDao {
     @Query("SELECT * FROM listsTable")
     suspend fun getLists(): List<ListEntity>
 
+    @Query("SELECT * FROM listsTable WHERE id = :listId")
+    fun getList(listId: Int): Flow<ListEntity?>
 }
