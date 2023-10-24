@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_add_list_icon"
             app:iconSize="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
@@ -34,11 +34,95 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@={list.title}"
-            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintBottom_toBottomOf="@+id/iconButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iconButton"
-            app:layout_constraintTop_toTopOf="parent"
+
             app:layout_constraintVertical_bias="0.5" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iconButton">
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/colorChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:checkedChip="@id/colorChip1"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                >
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/colorChip1"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:chipBackgroundColor="@color/listColorTheme1"
+                    style="@style/Widget.App.Chip.Filter"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/colorChip2"
+                    app:chipBackgroundColor="@color/listColorTheme2"
+
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    style="@style/Widget.App.Chip.Filter"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/colorChip3"
+                    app:chipBackgroundColor="@color/listColorTheme3"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    style="@style/Widget.App.Chip.Filter"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/colorChip4"
+                    app:chipBackgroundColor="@color/listColorTheme4"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    style="@style/Widget.App.Chip.Filter"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/colorChip5"
+                    app:chipBackgroundColor="@color/listColorTheme5"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    style="@style/Widget.App.Chip.Filter"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/colorChip6"
+                    app:chipBackgroundColor="@color/listColorTheme6"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    style="@style/Widget.App.Chip.Filter"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/colorChip7"
+                    app:chipBackgroundColor="@color/listColorTheme7"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    style="@style/Widget.App.Chip.Filter"
+                    />
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

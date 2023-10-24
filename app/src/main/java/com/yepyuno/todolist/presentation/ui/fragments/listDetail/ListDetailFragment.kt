@@ -7,14 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 import com.yepyuno.todolist.R
@@ -23,11 +20,8 @@ import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListDetailViewMo
 import com.yepyuno.todolist.presentation.ui.MainActivity
 import com.yepyuno.todolist.util.Constants.Companion.LOGTAG
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListDetailFragment : Fragment() {
@@ -72,16 +66,20 @@ class ListDetailFragment : Fragment() {
     private fun observeUiState(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                listDetailViewModel.uiState.collect{ uiState ->
+                listDetailViewModel.uiState.drop(1).collect{ uiState ->
                     uiState.userMessage?.let {
                         Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
                         listDetailViewModel.userMessageShown()
                     }
-                    if(uiState.showCreateDialog){
-                        val action = ListDetailFragmentDirections.actionListDetailFragmentToCreateListDialog()
-                        findNavController().navigate(action)
-                        listDetailViewModel.createDialogShown()
+                    when{
+                        uiState.list.isDefault -> {
+                            binding.collapsingToolbar.apply {
+                                isClickable = false
+                                isFocusable = false
+                            }
+                        }
                     }
+                    Log.d(LOGTAG, "observeUiState: $uiState")
                     binding.uiState = uiState
                 }
             }
@@ -89,9 +87,9 @@ class ListDetailFragment : Fragment() {
     }
 
     private fun setListeners(){
+
         binding.collapsingToolbar.setOnClickListener {
-            val action = ListDetailFragmentDirections.actionListDetailFragmentToUpdateListDialog()
-            findNavController().navigate(action)
+            listDetailViewModel.showUpdateListDialog()
         }
 
         binding.toolbar.setNavigationOnClickListener {

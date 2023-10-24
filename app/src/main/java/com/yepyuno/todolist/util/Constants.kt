@@ -29,5 +29,9 @@ class Constants {
         const val COLOR1 = "listColorTheme1"
         const val COLOR2 = "listColorTheme2"
         const val COLOR3 = "listColorTheme3"
+        const val COLOR4 = "listColorTheme4"
+        const val COLOR5 = "listColorTheme5"
+        const val COLOR6 = "listColorTheme6"
+        const val COLOR7 = "listColorTheme7"
     }
 }

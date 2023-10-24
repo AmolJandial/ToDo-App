@@ -1,21 +1,17 @@
 package com.yepyuno.todolist.presentation.stateHolders.viewmodel
 
-import androidx.lifecycle.Lifecycle
+import android.content.DialogInterface
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.viewModelScope
-import com.yepyuno.todolist.data.local.models.ListEntity
 import com.yepyuno.todolist.domain.GetListWithIdUsecase
 import com.yepyuno.todolist.presentation.stateHolders.models.ListDetailUiState
-import com.yepyuno.todolist.util.Constants
+import com.yepyuno.todolist.util.Constants.Companion.LOGTAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -45,9 +41,7 @@ class ListDetailViewModel @Inject constructor(
                         }
                     }
                     if(null == list){
-                        _uiState.update { currentUiState ->
-                            currentUiState.copy(showCreateDialog = true)
-                        }
+                        showCreateListDialog()
                     }
                 }
             } catch (ioe: IOException) {
@@ -58,14 +52,19 @@ class ListDetailViewModel @Inject constructor(
         }
     }
 
-    fun updateList(){
 
+    fun showUpdateListDialog(){
+
+        _uiState.update { currentUiState ->
+            currentUiState.copy(showUpdateDialog = true)
+        }
     }
 
-    fun createList(){
-
+    private fun showCreateListDialog(){
+        _uiState.update { currentUiState ->
+            currentUiState.copy(showCreateDialog = true)
+        }
     }
-
 
     fun userMessageShown() {
         _uiState.update { currentUiState ->
@@ -73,9 +72,15 @@ class ListDetailViewModel @Inject constructor(
         }
     }
 
-    fun createDialogShown(){
+    fun createListDialogShown(){
         _uiState.update { currentUiState ->
             currentUiState.copy(showCreateDialog = false)
+        }
+    }
+
+    fun updateListDialogShown(){
+        _uiState.update { currentUiState ->
+            currentUiState.copy(showUpdateDialog = false)
         }
     }
 

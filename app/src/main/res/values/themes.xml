@@ -5,7 +5,11 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.ToDoList" parent="Base.Theme.ToDoList" />
+    <style name="Theme.ToDoList" parent="Base.Theme.ToDoList">
+        
+        <item name="chipStyle">@style/Widget.App.Chip.Filter</item>
+        
+    </style>
 
 
 
@@ -13,4 +17,12 @@
         <item name="windowSplashScreenBackground">@color/splashScreenBackground</item>
         <item name="postSplashScreenTheme">@style/Theme.ToDoList</item>
     </style>
+
+
+    <style name="Widget.App.Chip.Filter" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="checkedIconVisible">false</item>
+        <item name="chipCornerRadius">8dp</item>
+
+    </style>
+
 </resources>
