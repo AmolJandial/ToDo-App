@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,22 +17,24 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 import com.yepyuno.todolist.R
 import com.yepyuno.todolist.databinding.FragmentListDetailBinding
+import com.yepyuno.todolist.presentation.stateHolders.models.ListDetailUiState
 import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListDetailViewModel
+import com.yepyuno.todolist.presentation.stateHolders.viewmodel.MainViewModel
 import com.yepyuno.todolist.presentation.ui.MainActivity
-import com.yepyuno.todolist.util.Constants.Companion.LOGTAG
+import com.yepyuno.todolist.util.Constants.Companion.TAG
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ListDetailFragment : Fragment() {
 
-    private val listDetailViewModel by hiltNavGraphViewModels<ListDetailViewModel>(R.id.listDetailDialogFragment)
-    private val mainViewModel by lazy { (activity as MainActivity).mainViewModel }
+    private val listDetailViewModel by hiltNavGraphViewModels<ListDetailViewModel>(R.id.listDetailNestedNavGraph)
+    private val mainViewModel by activityViewModels<MainViewModel>()
 
     private var _binding: FragmentListDetailBinding? = null
     private val binding get() = _binding!!
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,33 +66,36 @@ class ListDetailFragment : Fragment() {
 
     }
 
-    private fun observeUiState(){
+    private fun observeUiState() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                listDetailViewModel.uiState.drop(1).collect{ uiState ->
-                    uiState.userMessage?.let {
-                        Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
-                        listDetailViewModel.userMessageShown()
-                    }
-                    when{
-                        uiState.list.isDefault -> {
-                            binding.collapsingToolbar.apply {
-                                isClickable = false
-                                isFocusable = false
-                            }
-                        }
-                    }
-                    Log.d(LOGTAG, "observeUiState: $uiState")
-                    binding.uiState = uiState
+           viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                listDetailViewModel.uiState.collect { uiState ->
+                    render(uiState)
                 }
             }
         }
     }
 
-    private fun setListeners(){
+    private fun render(uiState: ListDetailUiState) {
+        when(uiState){
+            is ListDetailUiState.Loading -> {
+                Timber.d("$TAG LOADING...")
+            }
+            is ListDetailUiState.Success -> {
+                binding.uiState = uiState
+                Timber.d("$TAG GOT DATA = ${uiState.listWithTasksEntity}")
+            }
+            is ListDetailUiState.Error -> {
+                Timber.d("$TAG ERROR...")
+            }
+        }
+    }
 
-        binding.collapsingToolbar.setOnClickListener {
-            listDetailViewModel.showUpdateListDialog()
+    private fun setListeners() {
+
+        binding.fab.setOnClickListener {
+            binding.fab.hide()
+            findNavController().navigate(ListDetailFragmentDirections.actionListDetailFragmentToNewTaskBottomSheet())
         }
 
         binding.toolbar.setNavigationOnClickListener {

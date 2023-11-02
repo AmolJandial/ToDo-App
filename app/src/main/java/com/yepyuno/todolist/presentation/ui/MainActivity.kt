@@ -8,10 +8,10 @@ import android.view.ViewTreeObserver
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.yepyuno.todolist.R
-import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListDetailViewModel
 import com.yepyuno.todolist.presentation.stateHolders.viewmodel.MainViewModel
-import com.yepyuno.todolist.util.Constants.Companion.LOGTAG
+import com.yepyuno.todolist.util.Constants.Companion.TAG
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         view.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
                 return if(mainViewModel.isReady){
-                    Log.d(LOGTAG, "onCreate: GOT DATA FROM DATASTORE")
+                    Timber.d("$TAG ViewModel is ready with a state")
                     view.viewTreeObserver.removeOnPreDrawListener(this)
                     true
                 }else{

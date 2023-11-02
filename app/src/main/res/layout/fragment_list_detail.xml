@@ -7,7 +7,7 @@
 
         <variable
             name="uiState"
-            type="com.yepyuno.todolist.presentation.stateHolders.models.ListDetailUiState" />
+            type="com.yepyuno.todolist.presentation.stateHolders.models.ListDetailUiState.Success" />
 
     </data>
 
@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
                 android:fitsSystemWindows="true"
-                app:title="@{uiState.list.title}"
+                app:title="@{uiState.listWithTasksEntity.listEntity.title}"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 >
@@ -57,6 +57,18 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="32dp"
+
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/ic_add"
+            app:fabSize="auto"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

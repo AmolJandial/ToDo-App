@@ -12,11 +12,11 @@
         tools:layout="@layout/fragment_list" >
         <action
             android:id="@+id/action_listFragment_to_listDetailFragment"
-            app:destination="@id/listDetailDialogFragment" />
+            app:destination="@id/listDetailNestedNavGraph" />
 
 
     </fragment>
-    <navigation android:id="@+id/listDetailDialogFragment"
+    <navigation android:id="@+id/listDetailNestedNavGraph"
         app:startDestination="@id/listDetailFragment">
         <fragment
             android:id="@+id/listDetailFragment"
@@ -30,6 +30,9 @@
             <action
                 android:id="@+id/action_listDetailFragment_to_updateListDialog"
                 app:destination="@id/updateListDialog" />
+            <action
+                android:id="@+id/action_listDetailFragment_to_newTaskBottomSheet"
+                app:destination="@id/newTaskBottomSheet" />
         </fragment>
         <dialog
             android:id="@+id/updateListDialog"
@@ -39,5 +42,11 @@
             android:id="@+id/createListDialog"
             android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.CreateListDialog"
             android:label="CreateListDialog" />
+        <dialog
+            android:id="@+id/newTaskBottomSheet"
+            tools:layout="@layout/task_add_bottom_sheet"
+            android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.dialogs.NewTaskBottomSheet"
+            android:label="NewTaskBottomSheet" />
     </navigation>
+
 </navigation>

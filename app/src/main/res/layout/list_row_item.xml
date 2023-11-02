@@ -8,7 +8,7 @@
     <data>
         <variable
             name="listWithTasks"
-            type="com.yepyuno.todolist.data.local.models.ListWithTasks" />
+            type="com.yepyuno.todolist.presentation.stateHolders.models.ListWithTasks" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-            setListCount="@{listWithTasks.taskEntity}"
+            setListCount="@{listWithTasks.taskCount}"
             android:alpha="0.5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

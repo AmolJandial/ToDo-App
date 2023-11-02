@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.yepyuno.todolist.data.local.models.ListWithTasks
+import com.yepyuno.todolist.data.local.models.ListWithTasksEntity
 import com.yepyuno.todolist.databinding.ListRowItemBinding
+import com.yepyuno.todolist.presentation.stateHolders.models.ListWithTasks
 import javax.inject.Inject
 import javax.inject.Singleton
 

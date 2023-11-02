@@ -1,5 +1,7 @@
 package com.yepyuno.todolist.util
 
+import com.yepyuno.todolist.data.local.models.ListEntity
+
 class Constants {
     companion object{
         //Database constants
@@ -16,7 +18,7 @@ class Constants {
         const val DEFAULT_IS_SYNCED = false
 
         //Fragment constants
-        const val LOGTAG = "logging"
+        const val TAG = "logging"
         const val FRAGMENT_RECYCLER = "recyclerViewCaller"
         const val FRAGMENT_NEW_LIST = "newListCaller"
 
@@ -33,5 +35,7 @@ class Constants {
         const val COLOR5 = "listColorTheme5"
         const val COLOR6 = "listColorTheme6"
         const val COLOR7 = "listColorTheme7"
+        val DEFAULT_LIST = ListEntity(0, "Default", false, ICON_DEFAULT_LIST, COLOR1)
+
     }
 }

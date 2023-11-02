@@ -1,12 +1,23 @@
 package com.yepyuno.todolist.presentation.stateHolders.models
 
 import com.yepyuno.todolist.data.local.models.ListEntity
+import com.yepyuno.todolist.data.local.models.ListWithTasksEntity
+import com.yepyuno.todolist.data.local.models.TaskEntity
 import com.yepyuno.todolist.util.Constants.Companion.COLOR1
 import com.yepyuno.todolist.util.Constants.Companion.ICON_DEFAULT_LIST
 
-data class ListDetailUiState(
-    val list: ListEntity = ListEntity(0, "Untitled List", false, ICON_DEFAULT_LIST, COLOR1),
-    var userMessage: String? = null,
-    var showCreateDialog: Boolean = false,
-    var showUpdateDialog: Boolean = false,
-)
+sealed class ListDetailUiState{
+
+    data object Loading: ListDetailUiState()
+
+    data class Success(
+        val listWithTasksEntity: ListWithTasksEntity,
+        var newTaskName: String? = null,
+        var showCreateDialog: Boolean = false,
+        var showUpdateDialog: Boolean = false
+    ): ListDetailUiState()
+
+    data class Error(var userMessage: String): ListDetailUiState()
+
+}
+

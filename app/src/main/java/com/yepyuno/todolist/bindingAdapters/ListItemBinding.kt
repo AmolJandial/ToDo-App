@@ -30,8 +30,11 @@ class ListItemBinding {
 
         @BindingAdapter("setListCount")
         @JvmStatic
-        fun TextView.setListCount(taskEntity: TaskEntity?){
-            text = "0"
+        fun TextView.setListCount(taskCount: Int){
+            text = when(taskCount){
+                0 -> ""
+                else -> taskCount.toString()
+            }
         }
 
 

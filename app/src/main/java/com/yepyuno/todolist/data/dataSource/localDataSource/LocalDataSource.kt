@@ -3,8 +3,8 @@ package com.yepyuno.todolist.data.dataSource.localDataSource
 import com.yepyuno.todolist.data.local.dao.ListDao
 import com.yepyuno.todolist.data.local.dao.TaskDao
 import com.yepyuno.todolist.data.local.models.ListEntity
-import com.yepyuno.todolist.data.local.models.ListWithTasks
-import dagger.hilt.android.scopes.ActivityRetainedScoped
+import com.yepyuno.todolist.data.local.models.ListWithTasksEntity
+import com.yepyuno.todolist.data.local.models.TaskEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,10 +18,12 @@ class LocalDataSource @Inject constructor(
     suspend fun getLists(): List<ListEntity> =
         listDao.getLists()
 
-    suspend fun getListsWithTasks(): List<ListWithTasks> =
+    suspend fun getListsWithTasks(): List<ListWithTasksEntity> =
         listDao.getListsWithTasks()
 
-    fun getListWithId(listId: Int): Flow<ListEntity?> = listDao.getList(listId)
+    suspend fun insertTask(taskEntity: TaskEntity) = taskDao.insertTask(taskEntity)
 
+
+    fun getListWithTasks(listId: Int) = listDao.getListWithTasks(listId)
 
 }

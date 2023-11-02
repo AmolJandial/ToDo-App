@@ -16,12 +16,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 import com.yepyuno.todolist.R
 import com.yepyuno.todolist.databinding.FragmentListBinding
+import com.yepyuno.todolist.presentation.stateHolders.models.HomeUiState
 import com.yepyuno.todolist.presentation.stateHolders.viewmodel.MainViewModel
-import com.yepyuno.todolist.presentation.ui.MainActivity
 import com.yepyuno.todolist.presentation.ui.fragments.lists.adapter.ListsAdapter
-import com.yepyuno.todolist.util.Constants.Companion.LOGTAG
+import com.yepyuno.todolist.util.Constants.Companion.TAG
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,6 +43,7 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentListBinding.inflate(layoutInflater)
+
         return binding.root
     }
 
@@ -51,28 +53,30 @@ class ListFragment : Fragment() {
         setRecyclerView()
         observerUiState()
         setListeners()
-        mainViewModel.fetchData()
 
     }
 
     private fun observerUiState(){
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+           viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 mainViewModel.uiState.collect(){ uiState ->
-                    uiState.userMessage?.let {
-                        Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
-                        mainViewModel.userMessageShown()
-                    }
-
-                    uiState.listsWithTasks?.let {
-                        listsAdapter.submitList(it)
-                    }
-
-
-                    Log.d(LOGTAG, "thread: ${Thread.currentThread().name}," +
-                            " uiState: ${uiState.username} ${uiState.isSynced}" +
-                            " ${uiState.listsWithTasks?.toList() ?: "nullList"}")
+                    render(uiState)
                 }
+            }
+        }
+    }
+
+    private fun render(uiState: HomeUiState) {
+        when(uiState){
+            is HomeUiState.Loading -> {
+                Timber.d("$TAG Loading Data")
+            }
+            is HomeUiState.Success -> {
+                Timber.d("$TAG Got User = ${uiState.username} and listsWithTasks = ${uiState.listsWithTasks}")
+                listsAdapter.submitList(uiState.listsWithTasks)
+            }
+            is HomeUiState.Error -> {
+
             }
         }
     }

@@ -2,8 +2,11 @@ package com.yepyuno.todolist.data.repository
 
 import com.yepyuno.todolist.data.dataSource.localDataSource.LocalDataSource
 import com.yepyuno.todolist.data.local.models.ListEntity
-import com.yepyuno.todolist.data.local.models.ListWithTasks
+import com.yepyuno.todolist.data.local.models.ListWithTasksEntity
+import com.yepyuno.todolist.data.local.models.mapToListWithTasks
+import com.yepyuno.todolist.presentation.stateHolders.models.ListWithTasks
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,11 +20,15 @@ class ListRepository @Inject constructor(
     }
 
     suspend fun getListsWithTasks(): List<ListWithTasks>{
-        return localDataSource.getListsWithTasks()
+        val databaseResult = localDataSource.getListsWithTasks().map {
+            it.mapToListWithTasks()
+        }
+
+        return databaseResult
     }
 
-    fun getListWithId(listId: Int): Flow<ListEntity?>{
-        return localDataSource.getListWithId(listId)
+    fun getListWithTasks(listId: Int): Flow<ListWithTasksEntity>{
+       return localDataSource.getListWithTasks(listId)
     }
 
 }

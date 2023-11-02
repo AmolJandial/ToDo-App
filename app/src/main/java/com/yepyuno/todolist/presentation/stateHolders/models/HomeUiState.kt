@@ -1,11 +1,17 @@
 package com.yepyuno.todolist.presentation.stateHolders.models
 
-import com.yepyuno.todolist.data.local.models.ListEntity
-import com.yepyuno.todolist.data.local.models.ListWithTasks
+sealed class HomeUiState{
 
-data class HomeUiState(
-    val username: String = "",
-    val isSynced: Boolean = false,
-    val userMessage: String? = null,
-    val listsWithTasks: List<ListWithTasks>? = null
-)
+    data object Loading: HomeUiState()
+
+    data class Success(
+        val username: String = "",
+        val isSynced: Boolean = false,
+        val listsWithTasks: List<ListWithTasks>? = null
+    ): HomeUiState()
+
+    data class Error(val errorMessage: String): HomeUiState()
+
+}
+
+

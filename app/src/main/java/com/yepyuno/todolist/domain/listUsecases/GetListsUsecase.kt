@@ -1,16 +1,16 @@
-package com.yepyuno.todolist.domain
+package com.yepyuno.todolist.domain.listUsecases
 
 import com.yepyuno.todolist.data.local.models.ListEntity
 import com.yepyuno.todolist.data.repository.ListRepository
 import dagger.hilt.android.scopes.ViewModelScoped
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @ViewModelScoped
-class GetListWithIdUsecase @Inject constructor(
+class GetListsUsecase @Inject constructor(
     private val listRepository: ListRepository
-) {
+){
 
-    operator fun invoke(listId: Int): Flow<ListEntity?> = listRepository.getListWithId(listId)
+    suspend operator fun invoke(): List<ListEntity> =
+        listRepository.getLists()
 
 }
