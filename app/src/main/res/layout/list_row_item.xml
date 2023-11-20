@@ -8,7 +8,7 @@
     <data>
         <variable
             name="listWithTasks"
-            type="com.yepyuno.todolist.presentation.stateHolders.models.ListWithTasks" />
+            type="com.yepyuno.todolist.presentation.stateHolders.models.ListsWithTasks" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,7 +5,9 @@ import com.yepyuno.todolist.data.local.dao.TaskDao
 import com.yepyuno.todolist.data.local.models.ListEntity
 import com.yepyuno.todolist.data.local.models.ListWithTasksEntity
 import com.yepyuno.todolist.data.local.models.TaskEntity
+import com.yepyuno.todolist.util.Constants
 import kotlinx.coroutines.flow.Flow
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,5 +27,9 @@ class LocalDataSource @Inject constructor(
 
 
     fun getListWithTasks(listId: Int) = listDao.getListWithTasks(listId)
+
+    suspend fun updateTask(taskEntity: TaskEntity){
+        taskDao.updateTask(taskEntity)
+    }
 
 }

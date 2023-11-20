@@ -1,4 +1,4 @@
-package com.yepyuno.todolist.presentation.ui.fragments.listDetail
+package com.yepyuno.todolist.presentation.ui.fragments.listDetail.dialogs
 
 
 import android.app.Dialog
@@ -9,16 +9,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yepyuno.todolist.R
 import com.yepyuno.todolist.databinding.ListDialogViewBinding
 import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListDetailViewModel
 import com.yepyuno.todolist.util.Constants.Companion.TAG
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class UpdateListDialog : DialogFragment() {

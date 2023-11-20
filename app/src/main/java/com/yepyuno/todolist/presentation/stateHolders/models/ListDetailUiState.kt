@@ -12,9 +12,10 @@ sealed class ListDetailUiState{
 
     data class Success(
         val listWithTasksEntity: ListWithTasksEntity,
-        var newTaskName: String? = null,
+        var newTaskAdded: Boolean = false,
         var showCreateDialog: Boolean = false,
-        var showUpdateDialog: Boolean = false
+        var showUpdateDialog: Boolean = false,
+        var bottomSheetDismissed: Boolean = false
     ): ListDetailUiState()
 
     data class Error(var userMessage: String): ListDetailUiState()

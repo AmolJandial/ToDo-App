@@ -5,25 +5,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.yepyuno.todolist.data.local.models.ListWithTasksEntity
 import com.yepyuno.todolist.databinding.ListRowItemBinding
-import com.yepyuno.todolist.presentation.stateHolders.models.ListWithTasks
+import com.yepyuno.todolist.presentation.stateHolders.models.ListsWithTasks
+import dagger.hilt.android.scopes.FragmentScoped
+import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class ListsAdapter @Inject constructor(): ListAdapter<ListWithTasks, ListsAdapter.ListsViewHolder>(ListsDiffUtil) {
+@FragmentScoped
+class ListsAdapter @Inject constructor(): ListAdapter<ListsWithTasks, ListsAdapter.ListsViewHolder>(ListsDiffUtil) {
 
-    private var onItemClickListener: ((ListWithTasks) -> Unit)? = null
+    private var onItemClickListener: ((ListsWithTasks) -> Unit)? = null
 
     inner class ListsViewHolder(private val binding: ListRowItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(listWithTasks: ListWithTasks){
-            binding.listWithTasks = listWithTasks
+        fun bind(listsWithTasks: ListsWithTasks){
+            binding.listWithTasks = listsWithTasks
             binding.executePendingBindings()
 
             binding.root.setOnClickListener {
                 onItemClickListener?.let {
-                    it(listWithTasks)
+                    it(listsWithTasks)
                 }
             }
         }
@@ -39,18 +40,18 @@ class ListsAdapter @Inject constructor(): ListAdapter<ListWithTasks, ListsAdapte
         holder.bind(getItem(position))
     }
 
-    fun setOnItemClickListener(listener: (ListWithTasks) -> Unit){
+    fun setOnItemClickListener(listener: (ListsWithTasks) -> Unit){
         onItemClickListener = listener
     }
 
 }
 
-object ListsDiffUtil: DiffUtil.ItemCallback<ListWithTasks>(){
-    override fun areItemsTheSame(oldItem: ListWithTasks, newItem: ListWithTasks): Boolean {
+object ListsDiffUtil: DiffUtil.ItemCallback<ListsWithTasks>(){
+    override fun areItemsTheSame(oldItem: ListsWithTasks, newItem: ListsWithTasks): Boolean {
         return oldItem.listEntity.id == newItem.listEntity.id
     }
 
-    override fun areContentsTheSame(oldItem: ListWithTasks, newItem: ListWithTasks): Boolean {
+    override fun areContentsTheSame(oldItem: ListsWithTasks, newItem: ListsWithTasks): Boolean {
         return oldItem == newItem
     }
 

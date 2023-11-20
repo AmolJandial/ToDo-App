@@ -6,7 +6,6 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.yepyuno.todolist.data.local.models.ListEntity
 import com.yepyuno.todolist.data.local.models.ListWithTasksEntity
-import com.yepyuno.todolist.presentation.stateHolders.models.ListWithTasks
 import kotlinx.coroutines.flow.Flow
 
 @Dao

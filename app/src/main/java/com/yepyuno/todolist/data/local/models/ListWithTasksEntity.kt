@@ -2,7 +2,7 @@ package com.yepyuno.todolist.data.local.models
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.yepyuno.todolist.presentation.stateHolders.models.ListWithTasks
+import com.yepyuno.todolist.presentation.stateHolders.models.ListsWithTasks
 
 data class ListWithTasksEntity(
     @Embedded val listEntity: ListEntity,
@@ -15,7 +15,7 @@ data class ListWithTasksEntity(
 
 )
 
-fun ListWithTasksEntity.mapToListWithTasks() = ListWithTasks(
+fun ListWithTasksEntity.mapToListWithTasks() = ListsWithTasks(
     listEntity,
     taskEntity?.count() ?: 0
 )

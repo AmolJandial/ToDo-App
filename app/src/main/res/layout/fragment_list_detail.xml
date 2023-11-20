@@ -19,7 +19,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
+
             >
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -30,9 +30,7 @@
                 style="?attr/collapsingToolbarLayoutMediumStyle"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
-                android:fitsSystemWindows="true"
                 app:title="@{uiState.listWithTasksEntity.listEntity.title}"
-                app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 >
 
@@ -55,8 +53,10 @@
             android:id="@+id/taskRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:transitionGroup="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -68,7 +68,8 @@
             android:layout_marginBottom="32dp"
             android:src="@drawable/ic_add"
             app:fabSize="auto"
-            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge" />
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+            android:contentDescription="@string/add_new_task" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

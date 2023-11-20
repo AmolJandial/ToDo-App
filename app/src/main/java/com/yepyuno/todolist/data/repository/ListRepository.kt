@@ -4,9 +4,8 @@ import com.yepyuno.todolist.data.dataSource.localDataSource.LocalDataSource
 import com.yepyuno.todolist.data.local.models.ListEntity
 import com.yepyuno.todolist.data.local.models.ListWithTasksEntity
 import com.yepyuno.todolist.data.local.models.mapToListWithTasks
-import com.yepyuno.todolist.presentation.stateHolders.models.ListWithTasks
+import com.yepyuno.todolist.presentation.stateHolders.models.ListsWithTasks
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,7 +18,7 @@ class ListRepository @Inject constructor(
         return localDataSource.getLists()
     }
 
-    suspend fun getListsWithTasks(): List<ListWithTasks>{
+    suspend fun getListsWithTasks(): List<ListsWithTasks>{
         val databaseResult = localDataSource.getListsWithTasks().map {
             it.mapToListWithTasks()
         }

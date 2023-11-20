@@ -36,11 +36,11 @@
         </fragment>
         <dialog
             android:id="@+id/updateListDialog"
-            android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.UpdateListDialog"
+            android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.dialogs.UpdateListDialog"
             android:label="UpdateListDialog" />
         <dialog
             android:id="@+id/createListDialog"
-            android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.CreateListDialog"
+            android:name="com.yepyuno.todolist.presentation.ui.fragments.listDetail.dialogs.CreateListDialog"
             android:label="CreateListDialog" />
         <dialog
             android:id="@+id/newTaskBottomSheet"

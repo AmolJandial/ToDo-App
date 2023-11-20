@@ -1,8 +1,6 @@
 package com.yepyuno.todolist.presentation.ui.fragments.listDetail
 
-import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,22 +11,24 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.MaterialSharedAxis
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yepyuno.todolist.R
 import com.yepyuno.todolist.databinding.FragmentListDetailBinding
 import com.yepyuno.todolist.presentation.stateHolders.models.ListDetailUiState
 import com.yepyuno.todolist.presentation.stateHolders.viewmodel.ListDetailViewModel
 import com.yepyuno.todolist.presentation.stateHolders.viewmodel.MainViewModel
-import com.yepyuno.todolist.presentation.ui.MainActivity
+import com.yepyuno.todolist.presentation.ui.fragments.listDetail.adapter.TaskAdapter
 import com.yepyuno.todolist.util.Constants.Companion.TAG
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListDetailFragment : Fragment() {
+
+    @Inject
+    lateinit var taskAdapter: TaskAdapter
 
     private val listDetailViewModel by hiltNavGraphViewModels<ListDetailViewModel>(R.id.listDetailNestedNavGraph)
     private val mainViewModel by activityViewModels<MainViewModel>()
@@ -36,16 +36,6 @@ class ListDetailFragment : Fragment() {
     private var _binding: FragmentListDetailBinding? = null
     private val binding get() = _binding!!
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
-        }
-        returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,8 +53,10 @@ class ListDetailFragment : Fragment() {
 
         observeUiState()
         setListeners()
-
+        setRecyclerView()
     }
+
+
 
     private fun observeUiState() {
         lifecycleScope.launch {
@@ -83,6 +75,8 @@ class ListDetailFragment : Fragment() {
             }
             is ListDetailUiState.Success -> {
                 binding.uiState = uiState
+                taskAdapter.submitList(uiState.listWithTasksEntity.taskEntity)
+                if(uiState.bottomSheetDismissed) binding.fab.show()
                 Timber.d("$TAG GOT DATA = ${uiState.listWithTasksEntity}")
             }
             is ListDetailUiState.Error -> {
@@ -102,14 +96,18 @@ class ListDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        taskAdapter.setOnCheckClickListener {
+            it.isComplete = !it.isComplete
+            listDetailViewModel.updateTask(it)
+        }
+
     }
 
-    private fun createUpdateDialogListener() = DialogInterface.OnClickListener { _, which ->
-
-    }
-
-    private fun createNewDialogListener() = DialogInterface.OnClickListener { _, which ->
-
+    private fun setRecyclerView() {
+        binding.taskRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = taskAdapter
+        }
     }
 
 

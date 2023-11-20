@@ -7,4 +7,7 @@
     <dimen name="list_row_icon_size">40dp</dimen>
     <dimen name="list_row_vertical_margin">16dp</dimen>
     <dimen name="list_row_horizontal_margin">16dp</dimen>
+    <dimen name="task_row_vertical_margin">16dp</dimen>
+    <dimen name="task_row_horizontal_margin">16dp</dimen>
+    <dimen name="task_row_checkmark_size">48dp</dimen>
 </resources>

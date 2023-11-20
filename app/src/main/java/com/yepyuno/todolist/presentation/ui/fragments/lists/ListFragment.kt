@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -17,6 +18,7 @@ import com.google.android.material.transition.MaterialSharedAxis
 import com.yepyuno.todolist.R
 import com.yepyuno.todolist.databinding.FragmentListBinding
 import com.yepyuno.todolist.presentation.stateHolders.models.HomeUiState
+import com.yepyuno.todolist.presentation.stateHolders.viewmodel.HomeViewModel
 import com.yepyuno.todolist.presentation.stateHolders.viewmodel.MainViewModel
 import com.yepyuno.todolist.presentation.ui.fragments.lists.adapter.ListsAdapter
 import com.yepyuno.todolist.util.Constants.Companion.TAG
@@ -32,6 +34,7 @@ class ListFragment : Fragment() {
     lateinit var listsAdapter: ListsAdapter
 
     private val mainViewModel by activityViewModels<MainViewModel>()
+    private val homeViewModel by viewModels<HomeViewModel>()
 
 
     private var _binding: FragmentListBinding? = null
@@ -59,7 +62,7 @@ class ListFragment : Fragment() {
     private fun observerUiState(){
         lifecycleScope.launch {
            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                mainViewModel.uiState.collect(){ uiState ->
+                homeViewModel.uiState.collect(){ uiState ->
                     render(uiState)
                 }
             }
@@ -72,6 +75,7 @@ class ListFragment : Fragment() {
                 Timber.d("$TAG Loading Data")
             }
             is HomeUiState.Success -> {
+                if(!mainViewModel.isReady) mainViewModel.isReady = true
                 Timber.d("$TAG Got User = ${uiState.username} and listsWithTasks = ${uiState.listsWithTasks}")
                 listsAdapter.submitList(uiState.listsWithTasks)
             }
@@ -95,12 +99,6 @@ class ListFragment : Fragment() {
         }
 
         binding.bottomAppBar.setOnClickListener {
-            exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).apply {
-                duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
-            }
-            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false).apply {
-                duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
-            }
             mainViewModel.listId = -1
             navigateToListDetail()
         }

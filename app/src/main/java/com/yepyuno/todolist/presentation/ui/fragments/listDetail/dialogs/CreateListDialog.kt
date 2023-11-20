@@ -1,4 +1,4 @@
-package com.yepyuno.todolist.presentation.ui.fragments.listDetail
+package com.yepyuno.todolist.presentation.ui.fragments.listDetail.dialogs
 
 
 import android.app.Dialog

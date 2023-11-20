@@ -13,4 +13,5 @@ class TaskRepository @Inject constructor(
 ) {
     suspend fun insertTask(taskEntity: TaskEntity) = localDataSource.insertTask(taskEntity)
 
+    suspend fun updateTask(taskEntity: TaskEntity) = localDataSource.updateTask(taskEntity)
 }

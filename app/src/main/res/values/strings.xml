@@ -7,4 +7,5 @@
     <string name="main_content">MAIN CONTENT</string>
     <string name="not_synced">Not Synced</string>
     <string name="new_list">New List</string>
+    <string name="add_new_task">Add New Task</string>
 </resources>
